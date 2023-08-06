@@ -21,15 +21,21 @@ export default function NavBar() {
         navigate('/')
         
     }
+
+    const toNew = ()=>{
+        navigate('/newApp')
+    }
     return (
         <div>
-            <nav class="navbar  bg-primary-subtle border border-primary-subtle rounded-3 ">
+            <nav class="navbar bg- border border-primary-subtle rounded-3 ">
                 <div class="container-fluid">
                     <a class="navbar-brand">JobHunt</a>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button onClick={toNew}  class=" btn btn-outline-primary" type="submit">Add New Application</button>
                             <button class="btn  me-2 btn-outline-primary" type="submit">Search</button>
                             <button onClick={logout} class="btn btn-outline-primary" type="submit">Logout</button>
+                           
                     </form>
                 </div>
             </nav>

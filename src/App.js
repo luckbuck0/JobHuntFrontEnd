@@ -7,12 +7,13 @@ import LandingPage from './pages/LandingPage';
 import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Home from './pages/home';
+import NewApp from './pages/NewApp';
 function App() {
   const authToken = localStorage.getItem('authToken')
   return (
     <div className="App">
       <Router>
-        <NavBar />
+        
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           {/* <Route exact path="/home" element={<Home />} /> */}
@@ -21,6 +22,14 @@ function App() {
             element={
              <ProtectedRoute>
                 <Home/>
+                </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/newApp"
+            element={
+             <ProtectedRoute>
+                <NewApp/>
                 </ProtectedRoute>
             }
           />
