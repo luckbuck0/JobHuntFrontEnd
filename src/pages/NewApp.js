@@ -5,9 +5,12 @@ import axios from 'axios'
 export default function NewApp(){
     const navigate = useNavigate()
 
- const [userId,setUserId]= useState("")
- console.log("this is userId-->",userId);
+ const [userId,setUserId]= useState()
  
+ console.log("this is userId-->",userId);
+
+
+
  useEffect(() => {
   const fetchUserId = async () => {
     try {
@@ -17,16 +20,22 @@ export default function NewApp(){
           Authorization: `Bearer ${userToken}`,
         },
       });
-
-      setUserId(response);
+      
+        setUserId(response.data);
       console.log(response.data);
+    
+      
     } catch (error) {
       console.error('Error sending GET request:', error);
     }
   };
 
   fetchUserId(); 
-}, [userId]); 
+}, []); 
+
+useEffect(() => {
+ application.useri=userId
+}, [userId]);
 
   console.log("this is userId-->",userId);
  
@@ -37,17 +46,17 @@ export default function NewApp(){
         location: "",
         position:"",
         pay: "",
-        job_type:"",
-        job_description_link:"",
+        jobType:"",
+        jobDescriptionLink:"",
         active:true,
-        user_id:"user"
+        useri:null
     })
 
     
 
-    const { company, position, location, pay, jobType,link,active } = application
+    const { company, position, location, pay, jobType,link } = application
     
-    const [token, setToken] = useState()
+  
     const onInputChange = (e) => {
         setApplication({ ...application, [e.target.name]: e.target.value });
     };
@@ -55,8 +64,10 @@ export default function NewApp(){
 
  const onSubmit = async (e) => {
   e.preventDefault();
+  
+  console.log(application);
     const userToken= localStorage.getItem('authToken')
-    // console.log("this is the token-->",userToken);
+    console.log("this is the tokens-->",userToken);
   try {
     const response = await axios.post(
       "http://localhost:8080/api/auth/archived",
@@ -69,7 +80,8 @@ export default function NewApp(){
     );
 
     console.log("this is the token-->", response.data.token);
-    // navigate('/home')
+    console.log("this is application-->",application);
+    navigate('/home')
   } catch (error) {
     console.log("error in post new application");
   }
@@ -153,13 +165,12 @@ export default function NewApp(){
               class="form-control form-control-md" 
               className='form-control'
               placeholder='Link'
-              name='link'
+              name='jobDescriptionLink'
               value={link}
               onChange={(e) => onInputChange(e)}
               />
               <label class="form-label" for="form2Example27">Link</label>
             </div>
-        
            
 
             <div class="pt-1 mb-4">
