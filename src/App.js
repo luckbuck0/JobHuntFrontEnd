@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Routes,Navigate } from 'react-router-do
 import ProtectedRoute from './ProtectedRoute';
 import Home from './pages/home';
 import NewApp from './pages/NewApp';
+import UpdateApp from './pages/UpdateApp';
 function App() {
   const authToken = localStorage.getItem('authToken')
   return (
@@ -30,6 +31,14 @@ function App() {
             element={
              <ProtectedRoute>
                 <NewApp/>
+                </ProtectedRoute>
+            }
+          />
+           <Route
+            path="/update_app/:id"
+            element={
+             <ProtectedRoute>
+                <UpdateApp/>
                 </ProtectedRoute>
             }
           />

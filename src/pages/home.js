@@ -1,10 +1,14 @@
 import NavBar from "../layout/navbar";
 import React, { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import DisplayArch from "./DisplayArch";
 import axios from 'axios'
 export default function Home() {
-
+    const navigate = useNavigate()
     const [archived, setArchived] = useState([])
-
+    
+   
+  
     useEffect(() => {
         const fetchByUserId = async () => {
             try {
@@ -42,13 +46,11 @@ export default function Home() {
                 archived.map((arch) => {
                     return (
                         <div class="card" >
-                            <div class="card-body">
-                                <h5 class="card-title">{arch.company}</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">{arch.position}</h6>
-                                <p class="card-text">{arch.jobType}</p>
-                                <p href="#" class="card-link">{arch.pay}</p>
-                                <a href="#" class="card-link">{arch.job_description_link}</a>
-                            </div>
+                            <DisplayArch
+                            arch={arch}
+                            />
+                         
+
                         </div>
 
                     )
